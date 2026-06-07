@@ -1,0 +1,1000 @@
+const HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabriel Ramos Ruiz – Sound Engineer</title>
+  <meta name="description" content="Professional Sound Engineer specializing in live production, touring, and high-performance audio environments." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #080808;
+      --dark:    #111111;
+      --mid:     #1a1a1a;
+      --border:  #2a2a2a;
+      --gold:    #c9a040;
+      --gold2:   #e8c76a;
+      --white:   #f0ece4;
+      --muted:   #888880;
+      --font-display: 'Montserrat', sans-serif;
+      --font-serif:   'Cormorant Garamond', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      transition: background 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(8,8,8,0.97);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo img {
+      height: 36px;
+      filter: brightness(1);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.4rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/86509251-5183-42c9-91c1-4f811719d5d2-1-edited.jpg?ssl=1');
+      background-size: cover;
+      background-position: center 20%;
+      transform: scale(1.04);
+      transition: transform 8s ease;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8,8,8,0.3) 0%,
+        rgba(8,8,8,0.1) 30%,
+        rgba(8,8,8,0.55) 60%,
+        rgba(8,8,8,0.96) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 4rem 5rem;
+      max-width: 900px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+    .hero-content h1 {
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+    .hero-subtitle {
+      font-family: var(--font-serif);
+      font-size: clamp(1.2rem, 2.5vw, 1.9rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(240, 236, 228, 0.7);
+      margin-bottom: 2.2rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.9rem 2rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+    }
+    .hero-cta:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      right: 4rem;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-scroll::after {
+      content: '';
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--muted), transparent);
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 6rem 4rem; }
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 2.5rem;
+    }
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-image {
+      position: relative;
+    }
+    .about-image img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top;
+      filter: grayscale(20%) contrast(1.05);
+    }
+    .about-image::before {
+      content: '';
+      position: absolute;
+      inset: -12px 12px 12px -12px;
+      border: 1px solid var(--border);
+      z-index: 0;
+    }
+    .about-image img { position: relative; z-index: 1; }
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: rgba(240, 236, 228, 0.78);
+      margin-bottom: 1.5rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── SERVICES ─── */
+    #services {
+      background: var(--black);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 1rem;
+    }
+    .service-card {
+      background: var(--black);
+      padding: 2.2rem 1.8rem;
+      transition: background 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.3s ease;
+    }
+    .service-card:hover { background: var(--mid); }
+    .service-card:hover::before { height: 100%; }
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .service-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .service-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── TOUR & CREDITS ─── */
+    #credits {
+      background: var(--dark);
+    }
+    .credits-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      margin-top: 1rem;
+    }
+    .current-projects h3 {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .project-card {
+      border-left: 2px solid var(--gold);
+      padding: 0.8rem 0 0.8rem 1.2rem;
+      margin-bottom: 1.4rem;
+    }
+    .project-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .project-role {
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-style: italic;
+      margin-bottom: 0.15rem;
+    }
+    .project-year {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* Credits table */
+    .credits-table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    thead tr {
+      border-bottom: 1px solid var(--gold);
+    }
+    thead th {
+      text-align: left;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0.6rem 1rem 0.6rem 0;
+    }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    tbody tr:hover { background: rgba(201, 160, 64, 0.05); }
+    tbody td {
+      padding: 0.85rem 1rem 0.85rem 0;
+      color: rgba(240,236,228,0.82);
+    }
+    tbody td:first-child { font-weight: 600; color: var(--white); }
+    .tag {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 2px;
+    }
+    .tag.foh { border-color: var(--gold); color: var(--gold); }
+    .tag.mon { border-color: #7b9cc9; color: #7b9cc9; }
+    .tag.pm  { border-color: #a27bc9; color: #a27bc9; }
+    .tag.sys { border-color: #7bc9a2; color: #7bc9a2; }
+
+    /* Artists & Venues */
+    .credits-extras {
+      margin-top: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .credits-extras h3 {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid var(--border);
+      color: rgba(240,236,228,0.7);
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .pill:hover { border-color: var(--gold); color: var(--gold); }
+    .pill-gear {
+      border-color: rgba(201,160,64,0.3);
+      color: rgba(240,236,228,0.85);
+      background: rgba(201,160,64,0.06);
+    }
+    .pill-gear:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,160,64,0.12); }
+    .credits-proficient {
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .credits-proficient h3 {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    /* ─── INSTAGRAM ─── */
+    #connect {
+      background: var(--black);
+      text-align: center;
+    }
+    #connect .section-title { margin-bottom: 0.6rem; }
+    .connect-sub {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+    .instagram-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1rem 2.4rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+      margin-bottom: 4rem;
+    }
+    .instagram-btn:hover { background: var(--gold); color: var(--black); }
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+    }
+    .insta-item {
+      aspect-ratio: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .insta-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(30%) brightness(0.85);
+      transition: filter 0.3s, transform 0.4s;
+    }
+    .insta-item:hover img {
+      filter: grayscale(0%) brightness(1);
+      transform: scale(1.05);
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-info p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(240,236,228,0.7);
+      margin-bottom: 2.5rem;
+    }
+    .contact-social {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-link:hover { border-color: var(--gold); color: var(--gold); }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 0.8rem 1rem;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      resize: vertical;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+    .form-group select option { background: var(--mid); }
+    .btn-submit {
+      padding: 0.95rem 2.4rem;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s;
+      align-self: flex-start;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover { background: var(--gold2); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo img { height: 28px; opacity: 0.6; }
+    .footer-copy {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      #about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .credits-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .credits-extras { grid-template-columns: 1fr; gap: 2rem; }
+      #contact { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .insta-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .hero-content { padding: 0 1.5rem 4rem; }
+      .hero-scroll { display: none; }
+    }
+    @media (max-width: 560px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo">
+      <img src="https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/cropped-gaby-logo-rwhite.png?fit=964%2C350&ssl=1" alt="Gabriel Ramos Ruiz" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#credits">Tour & Credits</a></li>
+      <li><a href="#connect">Instagram</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">&#9679; Currently on tour · Yandel Sinfónico 2025–2026</span>
+      <h1>Gabriel<br>Ramos Ruiz</h1>
+      <p class="hero-subtitle">Sound Engineer &amp; Live Production Specialist</p>
+      <a href="#contact" class="hero-cta">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.1 19.79 19.79 0 0 1 1.62 3.56 2 2 0 0 1 3.59 1.4h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.3l.42.62z"/></svg>
+        Get in Touch
+      </a>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-image">
+      <img src="https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/86509251-5183-42c9-91c1-4f811719d5d2-1-edited.jpg?resize=840%2C473&ssl=1" alt="Gabriel Ramos Ruiz at the console" loading="lazy" />
+    </div>
+    <div class="about-text">
+      <p class="section-label">About</p>
+      <h2 class="section-title">Where precision<br>meets performance.</h2>
+      <div class="divider"></div>
+      <p>I'm Gaby — a professional Sound Engineer specializing in live production, touring, and high-performance audio environments. With over a decade of experience on international tours, festivals, and large-scale arena events across the Americas, Europe, and Asia, I bring both technical precision and musical sensitivity to every show.</p>
+      <p>From system optimization and RF coordination to front-of-house and monitor engineering, my mission is to ensure every performance translates exactly as intended — from the console to the crowd.</p>
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">13+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">17+</div>
+          <div class="stat-label">Major Artists</div>
+        </div>
+        <div>
+          <div class="stat-num">5</div>
+          <div class="stat-label">Continents</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <p class="section-label">What I Do</p>
+    <h2 class="section-title">Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">🎚️</span>
+        <div class="service-name">FOH Engineer</div>
+        <div class="service-desc">Front-of-house mixing for arena tours, festivals, and stadium shows. Yamaha Rivage, DiGiCo, and more.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🎧</span>
+        <div class="service-name">Monitor Engineer</div>
+        <div class="service-desc">In-ear and wedge monitoring for demanding live environments. Artist-first approach.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📡</span>
+        <div class="service-name">RF Technician</div>
+        <div class="service-desc">Spectrum coordination, frequency planning, and wireless systems management for complex productions.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔊</span>
+        <div class="service-name">System Engineer</div>
+        <div class="service-desc">PA system design, optimization, and tuning. D&B Audiotechnik specialist and certified Flying Tech.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📋</span>
+        <div class="service-name">Production Manager</div>
+        <div class="service-desc">End-to-end production oversight — advancing, logistics, crew coordination, and show execution.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🏟️</span>
+        <div class="service-name">Flying Tech</div>
+        <div class="service-desc">D&B Audiotechnik certified array rigging and deployment specialist for touring and fixed installations.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🎛️</span>
+        <div class="service-name">A1 / A2 Technician</div>
+        <div class="service-desc">Broadcast and event audio engineering, stage patching, and technical production support.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔧</span>
+        <div class="service-name">D&B Specialist</div>
+        <div class="service-desc">Deep expertise in D&B Audiotechnik systems including ArrayCalc, R1 Remote, and SL-Series deployment.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOUR & CREDITS -->
+  <section id="credits">
+    <p class="section-label">Experience</p>
+    <h2 class="section-title">Tour &amp; Credits</h2>
+
+    <div class="credits-layout">
+      <div>
+        <div class="current-projects">
+          <h3>Current Projects</h3>
+          <div class="project-card">
+            <div class="project-name">Yandel Sinfónico</div>
+            <div class="project-role">Front of House Engineer</div>
+            <div class="project-year">USA &amp; Latin America Tour · 2025–2026</div>
+          </div>
+          <div class="project-card">
+            <div class="project-name">LD Audio Chicago</div>
+            <div class="project-role">System Engineer / A1 / A2 / RF Technician</div>
+            <div class="project-year">2013–2026</div>
+          </div>
+          <div class="project-card">
+            <div class="project-name">Limitless Production Services</div>
+            <div class="project-role">System Engineer / A1 / A2 / RF Technician</div>
+            <div class="project-year">2025–2026</div>
+          </div>
+          <div class="project-card">
+            <div class="project-name">Golden Hour Touring</div>
+            <div class="project-role">Audio Engineer</div>
+            <div class="project-year">2025–2026</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="credits-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Artist</th>
+                <th>Role</th>
+                <th>Tour</th>
+                <th>Year</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Yandel</td>
+                <td><span class="tag foh">FOH</span></td>
+                <td>Sinfónico Tour</td>
+                <td>2025–26</td>
+              </tr>
+              <tr>
+                <td>Young Miko</td>
+                <td><span class="tag mon">MON</span></td>
+                <td>Billie Eilish Tour</td>
+                <td>2025</td>
+              </tr>
+              <tr>
+                <td>Gente de Zona</td>
+                <td><span class="tag pm">PM / MON</span></td>
+                <td>European Tour</td>
+                <td>2025–26</td>
+              </tr>
+              <tr>
+                <td>Jay Wheeler</td>
+                <td><span class="tag foh">FOH</span></td>
+                <td>Trappi Tour</td>
+                <td>2024</td>
+              </tr>
+              <tr>
+                <td>Ivan Cornejo</td>
+                <td><span class="tag sys">SYS</span></td>
+                <td>Mirada Tour</td>
+                <td>2024</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="credits-extras">
+      <div>
+        <h3>Artists Worked With</h3>
+        <div class="pill-list">
+          <span class="pill">Yandel</span>
+          <span class="pill">Daddy Yankee</span>
+          <span class="pill">Gente de Zona</span>
+          <span class="pill">Jay Wheeler</span>
+          <span class="pill">Young Miko</span>
+          <span class="pill">Sergio George</span>
+          <span class="pill">Ivy Queen</span>
+          <span class="pill">Ivan Cornejo</span>
+          <span class="pill">Luis Fonsi</span>
+          <span class="pill">Prince Royce</span>
+          <span class="pill">Farruko</span>
+          <span class="pill">Ozuna</span>
+          <span class="pill">Rauw Alejandro</span>
+          <span class="pill">Mike Towers</span>
+          <span class="pill">BTS</span>
+          <span class="pill">Red Velvet</span>
+          <span class="pill">BLACKPINK</span>
+        </div>
+      </div>
+      <div>
+        <h3>Major Venues &amp; Festivals</h3>
+        <div class="pill-list">
+          <span class="pill">Hard Rock Stadium</span>
+          <span class="pill">Madison Square Garden</span>
+          <span class="pill">UBS Arena</span>
+          <span class="pill">United Center</span>
+          <span class="pill">Kaseya Arena</span>
+          <span class="pill">All State Arena</span>
+          <span class="pill">Sueños Festival</span>
+          <span class="pill">The Forum</span>
+          <span class="pill">SoFi Stadium</span>
+          <span class="pill">Intuit Dome</span>
+          <span class="pill">Rolling Loud Festival</span>
+          <span class="pill">Breakaway Festival</span>
+          <span class="pill">Festival Viña del Mar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credits-proficient">
+      <h3>Proficient</h3>
+      <div class="pill-list">
+        <span class="pill pill-gear">DiGiCo SD-Series / Quantum Series</span>
+        <span class="pill pill-gear">Yamaha Rivage / CL Series</span>
+        <span class="pill pill-gear">Midas HD / Pro</span>
+        <span class="pill pill-gear">Avid Profile / S6L</span>
+        <span class="pill pill-gear">Shure</span>
+        <span class="pill pill-gear">D&amp;B Audiotechnik</span>
+        <span class="pill pill-gear">Waves</span>
+        <span class="pill pill-gear">UAD</span>
+        <span class="pill pill-gear">Lake</span>
+        <span class="pill pill-gear">Smaart</span>
+        <span class="pill pill-gear">Dante</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM / CONNECT -->
+  <section id="connect">
+    <p class="section-label">Latest</p>
+    <h2 class="section-title">Behind the Scenes</h2>
+    <p class="connect-sub">Follow the tour in real time</p>
+    <a href="https://www.instagram.com/gabrielramosruiz/" target="_blank" rel="noopener" class="instagram-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      @gabrielramosruiz
+    </a>
+    <div class="insta-grid">
+      <div class="insta-item">
+        <img src="https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/86509251-5183-42c9-91c1-4f811719d5d2-1-edited.jpg?resize=400%2C400&ssl=1" alt="At the console" loading="lazy" />
+      </div>
+      <div class="insta-item">
+        <img src="https://scontent-lax3-1.cdninstagram.com/v/t51.82787-15/641190542_18564339178045749_8646698586103302803_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&_nc_ohc=E5itXFAe-hgQ7kNvwFBMe8t&_nc_oc=AdpTj7bFuKw67H0lQHj-tW7B_LCwTPWUGEWpQx1Zuv1Tu8FrjIkJVZaRbi0rm0kEE_EFB0s5LP5EpLcl-QVBjRGl&_nc_zt=23&_nc_ht=scontent-lax3-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_Af8SFiOERMS4vMvqztfMWcZftj7G-17Z54RqKuA-EQ1IDg&oe=6A21AE96" alt="Viña del Mar" loading="lazy" onerror="this.parentElement.style.display='none'" />
+      </div>
+      <div class="insta-item">
+        <img src="https://scontent-lax3-2.cdninstagram.com/v/t51.82787-15/649240690_18565882492045749_6650412284421243892_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&_nc_ohc=EZGftSPUoM8Q7kNvwHIn-uY&_nc_oc=AdpC9TK644HEQuVEIO4-pzU5HeWokhd4sXk_bqi_9OdUVCmc4LZJ4GJkzPedTCgx-c53ISBCL65JMT7XldiFo9ZY&_nc_zt=23&_nc_ht=scontent-lax3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_Af_8wGOu22WFFloWTe9IVbRUVDmzwcHhTJt9RFT96zvSDQ&oe=6A217D35" alt="Soundcheck Torreón" loading="lazy" onerror="this.parentElement.style.display='none'" />
+      </div>
+      <div class="insta-item">
+        <img src="https://scontent-lax7-1.cdninstagram.com/v/t51.82787-15/709121689_18588357910045749_2514199266700648636_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&_nc_ohc=nhZSCOceJTsQ7kNvwE2vSoS&_nc_oc=AdqMycUbMLGnpoFrvRtusb0_dg2Y2mIqzcRhlpWZrv_S1ZbJOejAmEmMW-Rk4Thrtd8GBmfii1vap-9TOioz8fwl&_nc_zt=23&_nc_ht=scontent-lax3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_Af9HqEe3T156qbukHeQ1n2UYv6y2vmsz-3SL3Hbk-3kW6Q&oe=6A218CFE" alt="Birthday Weekend" loading="lazy" onerror="this.parentElement.style.display='none'" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-info">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Let's make<br>something great.</h2>
+      <div class="divider"></div>
+      <p>Available for touring engagements, festival productions, and large-scale live events worldwide. Reach out to discuss your project.</p>
+      <div class="contact-social">
+        <a href="https://www.instagram.com/gabrielramosruiz/" target="_blank" rel="noopener" class="social-link" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="First name" />
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Last name" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label for="project">Project Type</label>
+        <select id="project">
+          <option value="" disabled selected>Select a service…</option>
+          <option>FOH Engineering</option>
+          <option>Monitor Engineering</option>
+          <option>System Engineering</option>
+          <option>Production Management</option>
+          <option>RF Coordination</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" placeholder="Tell me about your project, dates, venue…"></textarea>
+      </div>
+      <button type="submit" class="btn-submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#hero" class="footer-logo">
+      <img src="https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/cropped-gaby-logo-rwhite.png?fit=964%2C350&ssl=1" alt="GRR" />
+    </a>
+    <p class="footer-copy">&copy; 2026 Gabriel Ramos Ruiz · Sound Engineer</p>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#credits">Credits</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // Sticky nav
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Subtle parallax on hero bg
+    const heroBg = document.getElementById('heroBg');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroBg.style.transform = \`scale(1.04) translateY(\${y * 0.25}px)\`;
+      }
+    });
+
+    // Animate hero bg scale on load
+    window.addEventListener('load', () => {
+      heroBg.style.transform = 'scale(1.0)';
+    });
+
+    // Contact form
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-submit');
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = '#4a9a6a';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
+`;
+
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    
+    // Serve HTML for all page requests
+    return new Response(HTML, {
+      headers: {
+        'Content-Type': 'text/html; charset=UTF-8',
+        'Cache-Control': 'public, max-age=3600',
+      },
+    });
+  },
+};
