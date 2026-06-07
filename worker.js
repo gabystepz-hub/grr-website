@@ -1,4 +1,6 @@
-const HTML = `<!DOCTYPE html>
+export default {
+  async fetch(request) {
+    return new Response(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -431,7 +433,27 @@ const HTML = `<!DOCTYPE html>
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .expertise-brand { }
+    .expertise-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.7rem;
+    }
+    @media (max-width: 900px) {
+      .expertise-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .expertise-grid { grid-template-columns: 1fr; }
     }
 
     /* ─── INSTAGRAM ─── */
@@ -797,6 +819,12 @@ const HTML = `<!DOCTYPE html>
                 <td>Mirada Tour</td>
                 <td>2024</td>
               </tr>
+              <tr>
+                <td>Golden Hour Touring</td>
+                <td><span class="tag foh">FOH</span></td>
+                <td>Various</td>
+                <td>2025–26</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -847,19 +875,54 @@ const HTML = `<!DOCTYPE html>
     </div>
 
     <div class="credits-proficient">
-      <h3>Proficient</h3>
-      <div class="pill-list">
-        <span class="pill pill-gear">DiGiCo SD-Series / Quantum Series</span>
-        <span class="pill pill-gear">Yamaha Rivage / CL Series</span>
-        <span class="pill pill-gear">Midas HD / Pro</span>
-        <span class="pill pill-gear">Avid Profile / S6L</span>
-        <span class="pill pill-gear">Shure</span>
-        <span class="pill pill-gear">D&amp;B Audiotechnik</span>
-        <span class="pill pill-gear">Waves</span>
-        <span class="pill pill-gear">UAD</span>
-        <span class="pill pill-gear">Lake</span>
-        <span class="pill pill-gear">Smaart</span>
-        <span class="pill pill-gear">Dante</span>
+      <h3>Expertise</h3>
+      <div class="expertise-grid">
+        <div class="expertise-brand">
+          <div class="expertise-name">DiGiCo</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">SD-Series</span>
+            <span class="pill pill-gear">Quantum Series</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">D&amp;B Audiotechnik</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">ArrayCalc</span>
+            <span class="pill pill-gear">R1 Remote</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">Yamaha</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">Rivage</span>
+            <span class="pill pill-gear">CL Series</span>
+            <span class="pill pill-gear">DM7 Series</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">Midas</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">HD</span>
+            <span class="pill pill-gear">Pro</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">Avid</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">S6L</span>
+            <span class="pill pill-gear">Profile</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">Software &amp; Systems</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">SMAART</span>
+            <span class="pill pill-gear">Lake</span>
+            <span class="pill pill-gear">Dante</span>
+            <span class="pill pill-gear">Shure Workbench</span>
+            <span class="pill pill-gear">XTA</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -983,14 +1046,7 @@ const HTML = `<!DOCTYPE html>
   </script>
 </body>
 </html>
-`;
-
-export default {
-  async fetch(request) {
-    const url = new URL(request.url);
-    
-    // Serve HTML for all page requests
-    return new Response(HTML, {
+`, {
       headers: {
         'Content-Type': 'text/html; charset=UTF-8',
         'Cache-Control': 'public, max-age=3600',
