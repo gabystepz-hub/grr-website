@@ -1,14 +1,18 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "grr-website",
+  "main": "worker.js",
   "compatibility_date": "2026-06-02",
-  "observability": {
-    "enabled": true
-  },
+  "observability": { "enabled": true },
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
   },
-  "compatibility_flags": [
-    "nodejs_compat"
+  "compatibility_flags": ["nodejs_compat"],
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "destination_address": "gabystepz@gmail.com"
+    }
   ]
 }

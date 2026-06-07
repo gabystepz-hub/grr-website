@@ -1034,12 +1034,64 @@
     });
 
     // Contact form
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('.btn-submit');
-      btn.textContent = 'Message Sent ✓';
-      btn.style.background = '#4a9a6a';
+      const form = e.target;
+      const btn = form.querySelector('.btn-submit');
+      const originalText = btn.textContent;
+      const originalBg = btn.style.background;
+
+      const payload = {
+        fname: form.querySelector('#fname').value.trim(),
+        lname: form.querySelector('#lname').value.trim(),
+        email: form.querySelector('#email').value.trim(),
+        project: form.querySelector('#project').value,
+        message: form.querySelector('#message').value.trim(),
+      };
+
+      if (!payload.fname || !payload.lname || !payload.email || !payload.message) {
+        btn.textContent = 'Please fill out all fields';
+        btn.style.background = '#c9614a';
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = originalBg;
+        }, 2600);
+        return;
+      }
+
+      btn.textContent = 'Sending…';
       btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.ok) {
+          btn.textContent = 'Message Sent ✓';
+          btn.style.background = '#4a9a6a';
+          form.reset();
+        } else {
+          btn.textContent = data.error || 'Something went wrong — try again';
+          btn.style.background = '#c9614a';
+          btn.disabled = false;
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = originalBg;
+          }, 3200);
+        }
+      } catch (err) {
+        btn.textContent = 'Network error — try again';
+        btn.style.background = '#c9614a';
+        btn.disabled = false;
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = originalBg;
+        }, 3200);
+      }
     }
   </script>
 </body>
