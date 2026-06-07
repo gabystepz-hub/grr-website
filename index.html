@@ -414,6 +414,45 @@
       transition: border-color 0.2s, color 0.2s;
     }
     .pill:hover { border-color: var(--gold); color: var(--gold); }
+    .pill-gear {
+      border-color: rgba(201,160,64,0.3);
+      color: rgba(240,236,228,0.85);
+      background: rgba(201,160,64,0.06);
+    }
+    .pill-gear:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,160,64,0.12); }
+    .credits-proficient {
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .credits-proficient h3 {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .expertise-brand { }
+    .expertise-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 0.7rem;
+    }
+    @media (max-width: 900px) {
+      .expertise-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .expertise-grid { grid-template-columns: 1fr; }
+    }
 
     /* ─── INSTAGRAM ─── */
     #connect {
@@ -729,6 +768,11 @@
             <div class="project-role">System Engineer / A1 / A2 / RF Technician</div>
             <div class="project-year">2025–2026</div>
           </div>
+          <div class="project-card">
+            <div class="project-name">Golden Hour Touring</div>
+            <div class="project-role">Audio Engineer</div>
+            <div class="project-year">2025–2026</div>
+          </div>
         </div>
       </div>
       <div>
@@ -772,6 +816,12 @@
                 <td><span class="tag sys">SYS</span></td>
                 <td>Mirada Tour</td>
                 <td>2024</td>
+              </tr>
+              <tr>
+                <td>Golden Hour Touring</td>
+                <td><span class="tag foh">FOH</span></td>
+                <td>Various</td>
+                <td>2025–26</td>
               </tr>
             </tbody>
           </table>
@@ -818,6 +868,58 @@
           <span class="pill">Rolling Loud Festival</span>
           <span class="pill">Breakaway Festival</span>
           <span class="pill">Festival Viña del Mar</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="credits-proficient">
+      <h3>Expertise</h3>
+      <div class="expertise-grid">
+        <div class="expertise-brand">
+          <div class="expertise-name">DiGiCo</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">SD-Series</span>
+            <span class="pill pill-gear">Quantum Series</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">D&amp;B Audiotechnik</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">ArrayCalc</span>
+            <span class="pill pill-gear">R1 Remote</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">Yamaha</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">Rivage</span>
+            <span class="pill pill-gear">CL Series</span>
+            <span class="pill pill-gear">DM7 Series</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">Midas</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">HD</span>
+            <span class="pill pill-gear">Pro</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">Avid</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">S6L</span>
+            <span class="pill pill-gear">Profile</span>
+          </div>
+        </div>
+        <div class="expertise-brand">
+          <div class="expertise-name">Software &amp; Systems</div>
+          <div class="pill-list">
+            <span class="pill pill-gear">SMAART</span>
+            <span class="pill pill-gear">Lake</span>
+            <span class="pill pill-gear">Dante</span>
+            <span class="pill pill-gear">Shure Workbench</span>
+            <span class="pill pill-gear">XTA</span>
+          </div>
         </div>
       </div>
     </div>
