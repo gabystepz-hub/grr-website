@@ -173,6 +173,20 @@
       background: linear-gradient(to bottom, var(--muted), transparent);
     }
 
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
     /* ─── SECTIONS ─── */
     section { padding: 6rem 4rem; }
     .section-label {
@@ -259,6 +273,7 @@
     .services-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(168px, auto);
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
@@ -267,10 +282,19 @@
     .service-card {
       background: var(--black);
       padding: 2.2rem 1.8rem;
-      transition: background 0.25s;
+      transition: background 0.25s, transform 0.3s ease;
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
+    .service-card.span-2 { grid-column: span 2; }
+    .service-card.span-2-rows { grid-row: span 2; }
+    .service-card.featured .service-icon { font-size: 2.6rem; }
+    .service-card.featured .service-name { font-size: 1.05rem; }
+    .service-card.featured .service-desc { font-size: 0.85rem; max-width: 32ch; }
+    .service-card:hover { transform: translateY(-2px); }
     .service-card::before {
       content: '';
       position: absolute;
@@ -622,6 +646,7 @@
       section { padding: 4rem 1.5rem; }
       #about { grid-template-columns: 1fr; gap: 2.5rem; }
       .services-grid { grid-template-columns: 1fr 1fr; }
+      .service-card.span-2, .service-card.span-2-rows { grid-column: span 1; grid-row: span 1; }
       .credits-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .credits-extras { grid-template-columns: 1fr; gap: 2rem; }
       #contact { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -633,6 +658,7 @@
     }
     @media (max-width: 560px) {
       .services-grid { grid-template-columns: 1fr; }
+      .service-card.span-2, .service-card.span-2-rows { grid-column: span 1; grid-row: span 1; }
       .about-stats { grid-template-columns: 1fr 1fr; }
     }
   </style>
@@ -670,10 +696,10 @@
 
   <!-- ABOUT -->
   <section id="about">
-    <div class="about-image">
+    <div class="about-image reveal">
       <img src="https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/86509251-5183-42c9-91c1-4f811719d5d2-1-edited.jpg?resize=840%2C473&ssl=1" alt="Gabriel Ramos Ruiz at the console" loading="lazy" />
     </div>
-    <div class="about-text">
+    <div class="about-text reveal">
       <p class="section-label">About</p>
       <h2 class="section-title">Where precision<br>meets performance.</h2>
       <div class="divider"></div>
@@ -701,42 +727,42 @@
     <p class="section-label">What I Do</p>
     <h2 class="section-title">Services</h2>
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card span-2 span-2-rows featured reveal">
         <span class="service-icon">🎚️</span>
         <div class="service-name">FOH Engineer</div>
-        <div class="service-desc">Front-of-house mixing for arena tours, festivals, and stadium shows. Yamaha Rivage, DiGiCo, and more.</div>
+        <div class="service-desc">Front-of-house mixing for arena tours, festivals, and stadium shows on Yamaha Rivage, DiGiCo, and more — translating every performance from console to crowd with precision and musical sensitivity.</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal">
         <span class="service-icon">🎧</span>
         <div class="service-name">Monitor Engineer</div>
         <div class="service-desc">In-ear and wedge monitoring for demanding live environments. Artist-first approach.</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal">
         <span class="service-icon">📡</span>
         <div class="service-name">RF Technician</div>
         <div class="service-desc">Spectrum coordination, frequency planning, and wireless systems management for complex productions.</div>
       </div>
-      <div class="service-card">
+      <div class="service-card span-2 featured reveal">
         <span class="service-icon">🔊</span>
         <div class="service-name">System Engineer</div>
-        <div class="service-desc">PA system design, optimization, and tuning. D&B Audiotechnik specialist and certified Flying Tech.</div>
+        <div class="service-desc">PA system design, optimization, and tuning — D&B Audiotechnik specialist and certified Flying Tech.</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal">
         <span class="service-icon">📋</span>
         <div class="service-name">Production Manager</div>
         <div class="service-desc">End-to-end production oversight — advancing, logistics, crew coordination, and show execution.</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal">
         <span class="service-icon">🏟️</span>
         <div class="service-name">Flying Tech</div>
         <div class="service-desc">D&B Audiotechnik certified array rigging and deployment specialist for touring and fixed installations.</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal">
         <span class="service-icon">🎛️</span>
         <div class="service-name">A1 / A2 Technician</div>
         <div class="service-desc">Broadcast and event audio engineering, stage patching, and technical production support.</div>
       </div>
-      <div class="service-card">
+      <div class="service-card reveal">
         <span class="service-icon">🔧</span>
         <div class="service-name">D&B Specialist</div>
         <div class="service-desc">Deep expertise in D&B Audiotechnik systems including ArrayCalc, R1 Remote, and SL-Series deployment.</div>
@@ -753,29 +779,29 @@
       <div>
         <div class="current-projects">
           <h3>Current Projects</h3>
-          <div class="project-card">
+          <div class="project-card reveal">
             <div class="project-name">Yandel Sinfónico</div>
             <div class="project-role">Front of House Engineer</div>
             <div class="project-year">USA &amp; Latin America Tour · 2025–2026</div>
           </div>
-          <div class="project-card">
+          <div class="project-card reveal">
             <div class="project-name">LD Audio Chicago</div>
             <div class="project-role">System Engineer / A1 / A2 / RF Technician</div>
             <div class="project-year">2013–2026</div>
           </div>
-          <div class="project-card">
+          <div class="project-card reveal">
             <div class="project-name">Limitless Production Services</div>
             <div class="project-role">System Engineer / A1 / A2 / RF Technician</div>
             <div class="project-year">2025–2026</div>
           </div>
-          <div class="project-card">
+          <div class="project-card reveal">
             <div class="project-name">Golden Hour Touring</div>
             <div class="project-role">Audio Engineer</div>
             <div class="project-year">2025–2026</div>
           </div>
         </div>
       </div>
-      <div>
+      <div class="reveal">
         <div class="credits-table-wrap">
           <table>
             <thead>
@@ -830,7 +856,7 @@
     </div>
 
     <div class="credits-extras">
-      <div>
+      <div class="reveal">
         <h3>Artists Worked With</h3>
         <div class="pill-list">
           <span class="pill">Yandel</span>
@@ -852,7 +878,7 @@
           <span class="pill">BLACKPINK</span>
         </div>
       </div>
-      <div>
+      <div class="reveal">
         <h3>Major Venues &amp; Festivals</h3>
         <div class="pill-list">
           <span class="pill">Hard Rock Stadium</span>
@@ -872,7 +898,7 @@
       </div>
     </div>
 
-    <div class="credits-proficient">
+    <div class="credits-proficient reveal">
       <h3>Expertise</h3>
       <div class="expertise-grid">
         <div class="expertise-brand">
@@ -935,16 +961,16 @@
       @gabrielramosruiz
     </a>
     <div class="insta-grid">
-      <div class="insta-item">
+      <div class="insta-item reveal">
         <img src="https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/86509251-5183-42c9-91c1-4f811719d5d2-1-edited.jpg?resize=400%2C400&ssl=1" alt="At the console" loading="lazy" />
       </div>
-      <div class="insta-item">
+      <div class="insta-item reveal">
         <img src="https://scontent-lax3-1.cdninstagram.com/v/t51.82787-15/641190542_18564339178045749_8646698586103302803_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&_nc_ohc=E5itXFAe-hgQ7kNvwFBMe8t&_nc_oc=AdpTj7bFuKw67H0lQHj-tW7B_LCwTPWUGEWpQx1Zuv1Tu8FrjIkJVZaRbi0rm0kEE_EFB0s5LP5EpLcl-QVBjRGl&_nc_zt=23&_nc_ht=scontent-lax3-1.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_Af8SFiOERMS4vMvqztfMWcZftj7G-17Z54RqKuA-EQ1IDg&oe=6A21AE96" alt="Viña del Mar" loading="lazy" onerror="this.parentElement.style.display='none'" />
       </div>
-      <div class="insta-item">
+      <div class="insta-item reveal">
         <img src="https://scontent-lax3-2.cdninstagram.com/v/t51.82787-15/649240690_18565882492045749_6650412284421243892_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&_nc_ohc=EZGftSPUoM8Q7kNvwHIn-uY&_nc_oc=AdpC9TK644HEQuVEIO4-pzU5HeWokhd4sXk_bqi_9OdUVCmc4LZJ4GJkzPedTCgx-c53ISBCL65JMT7XldiFo9ZY&_nc_zt=23&_nc_ht=scontent-lax3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_Af_8wGOu22WFFloWTe9IVbRUVDmzwcHhTJt9RFT96zvSDQ&oe=6A217D35" alt="Soundcheck Torreón" loading="lazy" onerror="this.parentElement.style.display='none'" />
       </div>
-      <div class="insta-item">
+      <div class="insta-item reveal">
         <img src="https://scontent-lax7-1.cdninstagram.com/v/t51.82787-15/709121689_18588357910045749_2514199266700648636_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&_nc_ohc=nhZSCOceJTsQ7kNvwE2vSoS&_nc_oc=AdqMycUbMLGnpoFrvRtusb0_dg2Y2mIqzcRhlpWZrv_S1ZbJOejAmEmMW-Rk4Thrtd8GBmfii1vap-9TOioz8fwl&_nc_zt=23&_nc_ht=scontent-lax3-2.cdninstagram.com&edm=ANo9K5cEAAAA&oh=00_Af9HqEe3T156qbukHeQ1n2UYv6y2vmsz-3SL3Hbk-3kW6Q&oe=6A218CFE" alt="Birthday Weekend" loading="lazy" onerror="this.parentElement.style.display='none'" />
       </div>
     </div>
@@ -952,7 +978,7 @@
 
   <!-- CONTACT -->
   <section id="contact">
-    <div class="contact-info">
+    <div class="contact-info reveal">
       <p class="section-label">Contact</p>
       <h2 class="section-title">Let's make<br>something great.</h2>
       <div class="divider"></div>
@@ -963,7 +989,7 @@
         </a>
       </div>
     </div>
-    <form class="contact-form" onsubmit="handleSubmit(event)">
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
       <div class="form-row">
         <div class="form-group">
           <label for="fname">First Name</label>
@@ -1013,6 +1039,20 @@
   </footer>
 
   <script>
+    // Scroll-reveal animations
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = (Array.from(el.parentElement.children).indexOf(el) % 4) * 90;
+          setTimeout(() => el.classList.add('visible'), delay);
+          revealObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
+
     // Sticky nav
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
@@ -1033,7 +1073,7 @@
       heroBg.style.transform = 'scale(1.0)';
     });
 
-// Contact form
+    // Contact form
     async function handleSubmit(e) {
       e.preventDefault();
       const form = e.target;
