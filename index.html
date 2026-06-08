@@ -82,25 +82,38 @@
       align-items: flex-end;
       overflow: hidden;
     }
-    .hero-bg {
+    /* cinematic slider — crossfading, slowly zooming background plates */
+    .hero-slider {
       position: absolute;
       inset: 0;
-      background-image: url('https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/86509251-5183-42c9-91c1-4f811719d5d2-1-edited.jpg?ssl=1');
-      background-size: cover;
-      background-position: center 20%;
-      transform: scale(1.04);
-      transition: transform 8s ease;
     }
-    .hero-bg::after {
-      content: '';
+    .hero-slide {
       position: absolute;
       inset: 0;
+      background-size: cover;
+      background-position: center 28%;
+      opacity: 0;
+      transform: scale(1);
+      transition: opacity 1.8s ease;
+    }
+    .hero-slide.active {
+      opacity: 1;
+      animation: heroZoom 9s ease-out forwards;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to   { transform: scale(1.12); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
       background: linear-gradient(
         to bottom,
-        rgba(8,8,8,0.3) 0%,
-        rgba(8,8,8,0.1) 30%,
-        rgba(8,8,8,0.55) 60%,
-        rgba(8,8,8,0.96) 100%
+        rgba(8,8,8,0.35) 0%,
+        rgba(8,8,8,0.12) 30%,
+        rgba(8,8,8,0.6) 62%,
+        rgba(8,8,8,0.97) 100%
       );
     }
     .hero-content {
@@ -191,12 +204,32 @@
       0%   { transform: scale(0.6); opacity: 0.85; }
       100% { transform: scale(2.4); opacity: 0; }
     }
-    .hero-content h1 {
+    /* rotating cinematic copy — kicker / big line / caption, crossfading with each slide */
+    .hero-fade {
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .hero-fade.fade-out {
+      opacity: 0 !important;
+      transform: translateY(10px);
+    }
+    .hero-kicker {
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(240, 236, 228, 0.65);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.4rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: heroFadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.35s forwards;
+    }
+    .hero-cinematic {
       position: relative;
-      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      font-size: clamp(3.4rem, 8vw, 7rem);
       font-weight: 900;
       line-height: 1.0;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
       margin-bottom: 0.9rem;
       background: linear-gradient(100deg, var(--white) 28%, var(--gold2) 50%, var(--white) 72%);
       background-size: 260% 100%;
@@ -206,42 +239,46 @@
       opacity: 0;
       transform: translateY(22px);
       animation:
-        heroFadeUp 1s cubic-bezier(.22,1,.36,1) 0.4s forwards,
-        heroShimmer 8s linear 1.6s infinite;
+        heroFadeUp 1s cubic-bezier(.22,1,.36,1) 0.5s forwards,
+        heroShimmer 8s linear 1.8s infinite;
     }
     @keyframes heroShimmer {
       0%   { background-position: 0% 50%; }
       100% { background-position: -260% 50%; }
     }
-    .hero-subtitle {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      font-family: var(--font-display);
-      font-size: clamp(0.92rem, 1.6vw, 1.15rem);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+    .hero-caption {
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+      letter-spacing: 0.04em;
       color: var(--muted);
-      margin-bottom: 2.4rem;
+      margin-bottom: 2.2rem;
       opacity: 0;
       transform: translateY(14px);
-      animation: heroFadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.6s forwards;
+      animation: heroFadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.65s forwards;
     }
-    .hero-subtitle .role-text {
-      color: var(--white);
+    .hero-signature {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      opacity: 0;
+      transform: translateY(14px);
+      animation: heroFadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.8s forwards;
     }
-    .hero-subtitle .cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
+    .hero-signature::before {
+      content: '';
+      width: 28px;
+      height: 1px;
       background: var(--gold);
-      animation: heroBlink 1s step-start infinite;
     }
-    @keyframes heroBlink {
-      50% { opacity: 0; }
+    .hero-signature span {
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.1em;
     }
     .hero-cta {
       display: inline-flex;
@@ -258,7 +295,7 @@
       transition: background 0.25s, color 0.25s, transform 0.25s;
       opacity: 0;
       transform: translateY(14px);
-      animation: heroFadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.8s forwards;
+      animation: heroFadeUp 0.9s cubic-bezier(.22,1,.36,1) 0.95s forwards;
     }
     .hero-cta:hover {
       background: var(--gold);
@@ -806,12 +843,19 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-slider" id="heroSlider">
+      <div class="hero-slide active" style="background-image:url('rivage_crowd.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('console_show1.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('sunset_rivage.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
     <div class="hero-glow"></div>
     <div class="hero-content">
       <span class="hero-badge"><span class="pulse-dot"></span>Currently on tour · Yandel Sinfónico 2025–2026</span>
-      <h1>Gabriel<br>Ramos Ruiz</h1>
-      <p class="hero-subtitle"><span class="role-text" id="heroRole"></span><span class="cursor"></span></p>
+      <p class="hero-kicker hero-fade" id="heroKicker">Soundcheck to sold-out</p>
+      <h1 class="hero-cinematic hero-fade" id="heroCinematic">Every Night</h1>
+      <p class="hero-caption hero-fade" id="heroCaption">Front of house for Yandel Sinfónico</p>
+      <p class="hero-signature"><span>Gabriel Ramos Ruiz · Sound Engineer &amp; Live Production Specialist</span></p>
       <a href="#contact" class="hero-cta">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.1 19.79 19.79 0 0 1 1.62 3.56 2 2 0 0 1 3.59 1.4h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.3l.42.62z"/></svg>
         Get in Touch
@@ -1200,25 +1244,38 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
     revealEls.forEach(el => revealObserver.observe(el));
 
-    // Hero role typewriter — cycles through roles for a more dynamic intro
-    const heroRoles = ['Sound Engineer', 'FOH Mixing Engineer', 'Live Production Specialist', 'Tour Audio Director'];
-    const heroRoleEl = document.getElementById('heroRole');
-    if (heroRoleEl) {
-      let roleIndex = 0, charIndex = 0, deleting = false;
-      const typeTick = () => {
-        const word = heroRoles[roleIndex];
-        if (!deleting) {
-          charIndex++;
-          heroRoleEl.textContent = word.slice(0, charIndex);
-          if (charIndex === word.length) { deleting = true; setTimeout(typeTick, 1700); return; }
-        } else {
-          charIndex--;
-          heroRoleEl.textContent = word.slice(0, charIndex);
-          if (charIndex === 0) { deleting = false; roleIndex = (roleIndex + 1) % heroRoles.length; }
-        }
-        setTimeout(typeTick, deleting ? 32 : 70);
-      };
-      typeTick();
+    // Cinematic hero slider — crossfades background plates and rotates copy in sync
+    const heroSlidesData = [
+      { kicker: 'Soundcheck to sold-out', title: 'Every Night', caption: 'Front of house for Yandel Sinfónico' },
+      { kicker: 'Console to crowd', title: 'Translated', caption: 'Precision mixing for arenas and festivals' },
+      { kicker: 'A decade of tours', title: 'On the Road', caption: 'Across the Americas, Europe & Asia' },
+    ];
+    const heroSlideEls = document.querySelectorAll('#heroSlider .hero-slide');
+    const heroKickerEl = document.getElementById('heroKicker');
+    const heroTitleEl = document.getElementById('heroCinematic');
+    const heroCaptionEl = document.getElementById('heroCaption');
+    let heroSlideIndex = 0;
+
+    function goToHeroSlide(i) {
+      heroSlideEls.forEach((el, idx) => {
+        el.classList.toggle('active', idx === i);
+        if (idx === i) { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; }
+      });
+      const fadeEls = [heroKickerEl, heroTitleEl, heroCaptionEl];
+      fadeEls.forEach(el => el.classList.add('fade-out'));
+      setTimeout(() => {
+        heroKickerEl.textContent = heroSlidesData[i].kicker;
+        heroTitleEl.textContent = heroSlidesData[i].title;
+        heroCaptionEl.textContent = heroSlidesData[i].caption;
+        fadeEls.forEach(el => el.classList.remove('fade-out'));
+      }, 420);
+    }
+
+    if (heroSlideEls.length) {
+      setInterval(() => {
+        heroSlideIndex = (heroSlideIndex + 1) % heroSlideEls.length;
+        goToHeroSlide(heroSlideIndex);
+      }, 6500);
     }
 
     // Sticky nav
@@ -1227,18 +1284,13 @@
       nav.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // Subtle parallax on hero bg
-    const heroBg = document.getElementById('heroBg');
+    // Subtle parallax on the hero slider stack
+    const heroSlider = document.getElementById('heroSlider');
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
       if (y < window.innerHeight) {
-        heroBg.style.transform = `scale(1.04) translateY(${y * 0.25}px)`;
+        heroSlider.style.transform = `translateY(${y * 0.25}px)`;
       }
-    });
-
-    // Animate hero bg scale on load
-    window.addEventListener('load', () => {
-      heroBg.style.transform = 'scale(1.0)';
     });
 
     // Contact form
