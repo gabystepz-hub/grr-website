@@ -853,9 +853,8 @@
     <div class="hero-content">
       <span class="hero-badge"><span class="pulse-dot"></span>Currently on tour · Yandel Sinfónico 2025–2026</span>
       <p class="hero-kicker hero-fade" id="heroKicker">Soundcheck to sold-out</p>
-      <h1 class="hero-cinematic hero-fade" id="heroCinematic">Every Night</h1>
+      <h1 class="hero-cinematic">Gabriel Ramos Ruiz</h1>
       <p class="hero-caption hero-fade" id="heroCaption">Front of house for Yandel Sinfónico</p>
-      <p class="hero-signature"><span>Gabriel Ramos Ruiz · Sound Engineer &amp; Live Production Specialist</span></p>
       <a href="#contact" class="hero-cta">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.1 19.79 19.79 0 0 1 1.62 3.56 2 2 0 0 1 3.59 1.4h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16.3l.42.62z"/></svg>
         Get in Touch
@@ -1246,13 +1245,12 @@
 
     // Cinematic hero slider — crossfades background plates and rotates copy in sync
     const heroSlidesData = [
-      { kicker: 'Soundcheck to sold-out', title: 'Every Night', caption: 'Front of house for Yandel Sinfónico' },
-      { kicker: 'Console to crowd', title: 'Translated', caption: 'Precision mixing for arenas and festivals' },
-      { kicker: 'A decade of tours', title: 'On the Road', caption: 'Across the Americas, Europe & Asia' },
+      { kicker: 'Soundcheck to sold-out', caption: 'Front of house for Yandel Sinfónico' },
+      { kicker: 'Console to crowd', caption: 'Precision mixing for arenas and festivals' },
+      { kicker: 'A decade of tours', caption: 'Across the Americas, Europe & Asia' },
     ];
     const heroSlideEls = document.querySelectorAll('#heroSlider .hero-slide');
     const heroKickerEl = document.getElementById('heroKicker');
-    const heroTitleEl = document.getElementById('heroCinematic');
     const heroCaptionEl = document.getElementById('heroCaption');
     let heroSlideIndex = 0;
 
@@ -1261,11 +1259,10 @@
         el.classList.toggle('active', idx === i);
         if (idx === i) { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; }
       });
-      const fadeEls = [heroKickerEl, heroTitleEl, heroCaptionEl];
+      const fadeEls = [heroKickerEl, heroCaptionEl];
       fadeEls.forEach(el => el.classList.add('fade-out'));
       setTimeout(() => {
         heroKickerEl.textContent = heroSlidesData[i].kicker;
-        heroTitleEl.textContent = heroSlidesData[i].title;
         heroCaptionEl.textContent = heroSlidesData[i].caption;
         fadeEls.forEach(el => el.classList.remove('fade-out'));
       }, 420);
