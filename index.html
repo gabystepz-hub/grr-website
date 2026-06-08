@@ -54,8 +54,10 @@
       border-bottom: 1px solid var(--border);
     }
     .nav-logo img {
-      height: 36px;
-      filter: brightness(1);
+      height: 50px;
+      width: auto;
+      /* logo artwork is black-on-transparent — invert so it reads white on the dark nav */
+      filter: invert(1);
     }
     .nav-links {
       display: flex;
@@ -780,7 +782,7 @@
       align-items: center;
       justify-content: space-between;
     }
-    .footer-logo img { height: 28px; opacity: 0.6; }
+    .footer-logo img { height: 36px; width: auto; opacity: 0.6; filter: invert(1); }
     .footer-copy {
       font-size: 0.7rem;
       color: var(--muted);
@@ -830,7 +832,7 @@
   <!-- NAV -->
   <nav id="nav">
     <a href="#hero" class="nav-logo">
-      <img src="https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/cropped-gaby-logo-rwhite.png?fit=964%2C350&ssl=1" alt="Gabriel Ramos Ruiz" />
+      <img src="gaby-logo.png" alt="Gabriel Ramos Ruiz" />
     </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
@@ -1217,7 +1219,7 @@
   <!-- FOOTER -->
   <footer>
     <a href="#hero" class="footer-logo">
-      <img src="https://i0.wp.com/gabrielramosruiz.com/wp-content/uploads/2026/03/cropped-gaby-logo-rwhite.png?fit=964%2C350&ssl=1" alt="GRR" />
+      <img src="gaby-logo.png" alt="GRR" />
     </a>
     <p class="footer-copy">&copy; 2026 Gabriel Ramos Ruiz · Sound Engineer</p>
     <ul class="footer-links">
