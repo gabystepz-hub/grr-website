@@ -96,7 +96,8 @@
       background-position: center 28%;
       opacity: 0;
       transform: scale(1);
-      transition: opacity 1.8s ease;
+      transition: opacity 1.8s ease, transform 2s ease;
+      will-change: opacity, transform;
     }
     .hero-slide.active {
       opacity: 1;
@@ -848,7 +849,7 @@
     <div class="hero-slider" id="heroSlider">
       <div class="hero-slide active" style="background-image:url('rivage_crowd.jpg')"></div>
       <div class="hero-slide" style="background-image:url('console_show1.jpg')"></div>
-      <div class="hero-slide" style="background-image:url('sunset_rivage.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('sunset_rivage.jpg'); background-position: center bottom;"></div>
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-glow"></div>
@@ -1152,7 +1153,7 @@
     </a>
     <div class="crowd-wide">
       <video autoplay muted loop playsinline>
-        <source src="yandel_carousel_3840x800.mp4" type="video/mp4">
+        <source src="yandel_sinfonico_carousel.mp4" type="video/mp4">
       </video>
     </div>
     <div class="insta-grid">
